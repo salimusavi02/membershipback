@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Membership Code</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        input[type="text"] { padding: 5px; width: 200px; }
+        button { padding: 5px 10px; }
+        #result { margin-top: 20px; }
+    </style>
+        <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Check Membership Code</h1>
+        <form @submit.prevent="checkCode">
+            <input type="text" v-model="code" placeholder="Enter membership code" required>
+            <button type="submit">Check</button>
+        </form>
+        <div id="result">
+            <p v-if="error">[[ error ]]</p>
+            <p v-else-if="result !== null">Code: [[ code ]] is [[ statusMessage ]]</p>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    code: '',
+                    result: null,
+                    error: null
+                }
+            },
+            computed: {
+                statusMessage() {
+                    return this.result ? 'Active' : 'Inactive';
+                }
+            },
+            methods: {
+                checkCode() {
+                    fetch('/membership/check-code/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': this.getCookie('csrftoken')
+                        },
+                        body: JSON.stringify({ code: this.code })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            this.error = data.error;
+                            this.result = null;
+                        } else {
+                            this.result = data.is_active;
+                            this.error = null;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        this.error = 'An error occurred';
+                        this.result = null;
+                    });
+                },
+                getCookie(name) {
+                    let cookieValue = null;
+                    if (document.cookie && document.cookie !== '') {
+                        const cookies = document.cookie.split(';');
+                        for (let i = 0; i < cookies.length; i++) {
+                            const cookie = cookies[i].trim();
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+            }
+        }).mount('#app').config.delimiters = ['[[', ']]'];
+    </script>
+</body>
+</html>

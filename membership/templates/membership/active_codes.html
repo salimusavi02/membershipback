@@ -1,0 +1,18 @@
+<h2>Membership Codes</h2>
+<ul>
+    {% for code in active_codes %}
+        <li>
+            {{ code.code }}:
+            {% if code.start_date and code.end_date %}
+                {{ code.start_date }} - {{ code.end_date }}
+                {% if code.is_active %}
+                    (Active)
+                {% else %}
+                    (Inactive)
+                {% endif %}
+            {% else %}
+                No validity period set
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
