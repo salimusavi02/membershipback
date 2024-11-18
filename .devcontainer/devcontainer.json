@@ -1,0 +1,15 @@
+{
+  "name": "Django Development Environment",
+  "dockerFile": "Dockerfile",
+  "context": "..",
+  "appPort": [
+    8000
+  ],
+  "extensions": [
+    "ms-python.python"
+  ],
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "postCreateCommand": "python manage.py migrate"
+}
