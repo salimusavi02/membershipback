@@ -1,15 +1,18 @@
 {
   "name": "Django Development Environment",
-  "dockerFile": "Dockerfile",
-  "context": "..",
-  "appPort": [
-    8000
-  ],
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "web",
+  "workspaceFolder": "/app",
   "extensions": [
-    "ms-python.python"
+    "ms-python.python",
+    "ms-azuretools.vscode-docker"
   ],
   "settings": {
+    "python.pythonPath": "/usr/local/bin/python3",
     "terminal.integrated.shell.linux": "/bin/bash"
   },
-  "postCreateCommand": "python manage.py migrate"
+  "postCreateCommand": "python3 manage.py migrate",
+  "appPort": [8000],
+  "forwardPorts": [8000],
+  "remoteUser": "vscode"
 }

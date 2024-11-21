@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Docker Image" type="docker-deploy" factoryName="docker-image" server-name="Docker">
+  <configuration default="false" name="run django app" type="docker-deploy" factoryName="docker-image" server-name="Docker">
     <deployment type="docker-image">
       <settings>
-        <option name="imageTag" value="my_django_image:2" />
+        <option name="imageTag" value="my_django_image:3" />
         <option name="containerName" value="my_django" />
         <option name="portBindings">
           <list>
