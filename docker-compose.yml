@@ -24,5 +24,6 @@ services:
       - "8000:8000"
     depends_on:
       - db
-    environment:
-      DATABASE_URL: postgres://myuser:mypassword@db:5432/mydatabase
+#    environment:
+#      DATABASE_URL: postgres://myuser:mypassword@db:5432/mydatabase
+#       DATABASE_URL: postgres://root:skNglFqKFNDRSM2iN1EioZV5@arthur:iran:liara:ir:32051/mydatabase
