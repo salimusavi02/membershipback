@@ -1,6 +1,6 @@
 {
   "name": "Django Development Environment",
-  "dockerFile": "Dockerfile",
+  "dockerFile": "../Dockerfile",
   "context": "..",
   "appPort": [8000],
   "extensions": [
