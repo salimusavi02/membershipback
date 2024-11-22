@@ -130,4 +130,5 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     "http://localhost:5173",  # Example for a frontend server
     # "https://example.com",
+    'https://*.app.github.dev',
 ]
