@@ -132,3 +132,7 @@ CORS_ALLOWED_ORIGINS = [
     # "https://example.com",
     'https://*.app.github.dev',
 ]
+CSRF_TRUSTED_ORIGINS = [
+'https://*.app.github.dev',
+'http://*.app.github.dev',
+ ]
